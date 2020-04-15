@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Form, Button } from "semantic-ui-react";
+import PassTimeList from "./PassTimeList";
 
 class PassTimes extends Component {
   constructor() {
@@ -7,6 +8,8 @@ class PassTimes extends Component {
     this.state = {
       longitude: "",
       latitude: "",
+      results: [],
+      showList: false,
     };
   }
 
@@ -17,14 +20,26 @@ class PassTimes extends Component {
   fetchData = (event) => {
     event.preventDefault();
     let long = parseFloat(this.state.longitude).toFixed(1);
-
     let lat = parseFloat(this.state.latitude).toFixed(1);
-
     fetch(
       `https://cors-anywhere.herokuapp.com/http://api.open-notify.org/iss-pass.json?lat=${lat}&lon=${long}`
     )
       .then((response) => response.json())
-      .then((response) => console.log(response));
+
+      .then((response) =>
+        this.setState({
+          results: response.response,
+          showList: true,
+        })
+      );
+  };
+
+  showList = () => {
+    if (this.state.showList) {
+      return this.state.results.map((result, index) => (
+        <PassTimeList result={result} key={index} />
+      ));
+    }
   };
   render() {
     const { fetchData, handleChange } = this;
@@ -48,6 +63,7 @@ class PassTimes extends Component {
             Submit
           </Button>
         </Form>
+        {this.showList()}
       </div>
     );
   }
