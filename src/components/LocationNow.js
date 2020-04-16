@@ -27,16 +27,17 @@ class LocationNow extends Component {
   render() {
     return (
       <div>
-        <h2>Location Now</h2>
+        <h2>Current Location</h2>
         <p className='location-data'>
-          <div>Longitude: {this.state.longitude}</div>
-          <div>Latitude: {this.state.latitude}</div>
-          <div>
-            Time Loaded:{" "}
-            <Moment unix format='MM/DD/YY HH:mm'>
-              {this.state.time}
-            </Moment>
-          </div>
+          Longitude: {this.state.longitude} <br />
+          Latitude: {this.state.latitude}
+          <br />
+          Time Loaded:{" "}
+          <Moment unix format='MM/DD/YY HH:mm'>
+            {this.state.time}
+          </Moment>
+          <br />
+          Unix Time Stamp: {this.state.time}
         </p>
       </div>
     );
