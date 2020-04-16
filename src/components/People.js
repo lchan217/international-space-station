@@ -10,7 +10,9 @@ class People extends Component {
   }
 
   componentDidMount() {
-    fetch("http://api.open-notify.org/astros.json")
+    return fetch(
+      "https://cors-anywhere.herokuapp.com/http://api.open-notify.org/astros.json"
+    )
       .then((response) => response.json())
       .then((response) => {
         this.setState({
