@@ -1,0 +1,13 @@
+.time-form {
+  width: 40%;
+}
+
+.form-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.pass-times-list {
+  display: flex;
+  justify-content: space-between;
+}
