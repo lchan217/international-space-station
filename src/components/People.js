@@ -1,7 +1,32 @@
-import React from "react";
+import React, { Component } from "react";
+import PeopleList from "./PeopleList";
 
-const People = () => {
-  return <div>People</div>;
-};
+class People extends Component {
+  constructor() {
+    super();
+    this.state = {
+      people: [],
+    };
+  }
+
+  componentDidMount() {
+    fetch("http://api.open-notify.org/astros.json")
+      .then((response) => response.json())
+      .then((response) => {
+        this.setState({
+          people: response.people,
+        });
+      });
+  }
+  render() {
+    return (
+      <div className='people-list'>
+        {this.state.people.map((person) => {
+          return <PeopleList person={person} />;
+        })}
+      </div>
+    );
+  }
+}
 
 export default People;
